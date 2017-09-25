@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: api-service
+
+server:
+  port: 9000
+ 
+zuul:
+  prefix: /api
+  ignoredServices: "*"
+  routes:
+    course-service:
+       path: /courses/**
+       serviceId: COURSE-SERVICE
+       stripPrefix: false       
+       
+eureka:
+  client:    
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+    instance:
+      preferIpAddress: true
+    
+ribbon: 
+  ConnectTimeout: 30000
+  ReadTimeout: 990000
+  maxAutoRetries: 1
+  MaxAutoRetriesNextServer: 2
+  eureka:
+    enabled: true
